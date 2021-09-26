@@ -26,4 +26,10 @@ public class EmployeeJdbcTest {
 		Integer res = employeeService.getQuery(query);
 		Assert.assertEquals((Integer)4,res);
 	}
+	@Test
+	public void updatedSalary_ShouldReturnTrue() throws SQLException{
+		EmployeeService employeeService = new EmployeeService();
+		int res = employeeService.updateData("Terissa",3000000.00);
+		Assert.assertEquals(2,res);
+	}
 }
