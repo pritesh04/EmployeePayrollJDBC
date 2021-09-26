@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class EmployeeService {
@@ -17,15 +18,23 @@ public class EmployeeService {
 	}
 	
 	public int updateData(String name,double value) throws SQLException {
-		employeePayrollJdbc = new EmployeePayrollJdbc();
+		employeePayrollJdbc = EmployeePayrollJdbc.getInstance();
 		Connection connection = employeePayrollJdbc.dbConnect();
 		java.sql.Statement statement = connection.createStatement();
 		String query = String.format("update payroll set basic_pay = '%.2f' where emp_id IN (select emp_id from employee where name = '%s');",value,name);
 		return statement.executeUpdate(query);
 	}
 	
+	public int updatePreparedData(String name,double value) throws SQLException {
+		employeePayrollJdbc = EmployeePayrollJdbc.getInstance();
+		Connection connection = employeePayrollJdbc.dbConnect();
+		String query = String.format("update payroll set basic_pay = '%.2f' where emp_id IN (select emp_id from employee where name = '%s');",value,name);
+		java.sql.PreparedStatement statement =  connection.prepareStatement(query);
+		return statement.executeUpdate();
+	}
+	
 	public ResultSet getQuerries(String query) throws SQLException {
-		employeePayrollJdbc = new EmployeePayrollJdbc();
+		employeePayrollJdbc = EmployeePayrollJdbc.getInstance();
 		Connection connection = employeePayrollJdbc.dbConnect();
 		java.sql.Statement statement = connection.createStatement();
 		

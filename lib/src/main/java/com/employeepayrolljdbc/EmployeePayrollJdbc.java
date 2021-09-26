@@ -8,6 +8,9 @@ import com.mysql.jdbc.Driver;
 
 public class EmployeePayrollJdbc {
 
+	private static EmployeePayrollJdbc employeePayrollJdbc;
+	public EmployeePayrollJdbc() {}
+
 Connection connection;
 	
 	public Connection dbConnect() {
@@ -29,5 +32,12 @@ Connection connection;
 			e.printStackTrace();
 		}
 		return connection;
+	}
+	
+	
+	public static EmployeePayrollJdbc getInstance() {
+		if (employeePayrollJdbc==null)
+			employeePayrollJdbc = new EmployeePayrollJdbc();
+		return employeePayrollJdbc;
 	}
 }

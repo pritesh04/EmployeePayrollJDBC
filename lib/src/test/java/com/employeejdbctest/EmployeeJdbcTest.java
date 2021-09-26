@@ -32,4 +32,11 @@ public class EmployeeJdbcTest {
 		int res = employeeService.updateData("Terissa",3000000.00);
 		Assert.assertEquals(2,res);
 	}
+	
+	@Test
+	public void UpdateUsingPreparedStatement_ShouldReturnTrue() throws SQLException{
+		EmployeeService employeePayrollService = new EmployeeService();
+		int res = employeePayrollService.updatePreparedData("Terissa",3000000.00);
+		Assert.assertEquals(2,res);
+	}
 }
