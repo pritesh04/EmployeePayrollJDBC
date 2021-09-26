@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.employeepayrolljdbc.EmployeePayrollJdbc;
 import com.employeepayrolljdbc.EmployeeService;
-import com.sun.tools.javac.util.Assert;
+
 
 public class EmployeeJdbcTest {
 	EmployeePayrollJdbc employeePayrollJdbc;
@@ -44,5 +44,24 @@ public class EmployeeJdbcTest {
 		EmployeeService employeePayrollService = new EmployeeService();
 		int res = employeePayrollService.updatePreparedData("Terissa",3000000.00);
 		org.junit.Assert.assertEquals(2,res);
+	}
+	@Test
+	public void ifData_FromDataBaseDate_ShouldReturnCount() throws SQLException{
+		EmployeeService employeeService = new EmployeeService();
+		Integer res = employeeService.retrieveDate();
+		org.junit.Assert.assertEquals((Integer)4,res);
+	}
+	
+	@Test
+	public void ifData_FromDataBaseSumMinMaxCount_ShouldReturnCount() throws SQLException{
+		EmployeeService employeeService = new EmployeeService();
+		Integer res = employeeService.sumData();
+		org.junit.Assert.assertEquals((Integer)2,res);
+		res = employeeService.minData();
+		org.junit.Assert.assertEquals((Integer)2,res);
+		res = employeeService.maxData();
+		org.junit.Assert.assertEquals((Integer)2,res);
+		res = employeeService.countData();
+		org.junit.Assert.assertEquals((Integer)2,res);
 	}
 }
